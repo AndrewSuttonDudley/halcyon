@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="institutionalBlocking" name="Institutional Blocking" isExecutable="true">
+    <serviceTask id="mailtask1" name="Mail Error" activiti:type="mail"></serviceTask>
+    <serviceTask id="servicetask1" name="Log Exception"></serviceTask>
+    <sequenceFlow id="flow14" sourceRef="mailtask1" targetRef="servicetask1"></sequenceFlow>
+    <sequenceFlow id="flow15" sourceRef="servicetask1" targetRef="errorendevent1"></sequenceFlow>
+    <subProcess id="subprocess1" name="subProcess">
+      <startEvent id="startevent1" name="Start"></startEvent>
+      <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="hierarchyClustering"></sequenceFlow>
+      <serviceTask id="hierarchyClustering" name="Hierarchy Clustering"></serviceTask>
+      <sequenceFlow id="flow2" sourceRef="hierarchyClustering" targetRef="disjointedGroups"></sequenceFlow>
+      <serviceTask id="disjointedGroups" name="Disjointed Groups"></serviceTask>
+      <endEvent id="endevent1" name="End"></endEvent>
+      <sequenceFlow id="flow20" sourceRef="disjointedGroups" targetRef="distanceMatrix"></sequenceFlow>
+      <serviceTask id="distanceMatrix" name="Distance Matrix"></serviceTask>
+      <serviceTask id="pMedoids" name="p-medoids"></serviceTask>
+      <sequenceFlow id="flow21" sourceRef="distanceMatrix" targetRef="pMedoids"></sequenceFlow>
+      <sequenceFlow id="flow22" sourceRef="pMedoids" targetRef="endevent1"></sequenceFlow>
+    </subProcess>
+    <startEvent id="startevent2" name="Start"></startEvent>
+    <sequenceFlow id="flow17" sourceRef="startevent2" targetRef="subprocess1"></sequenceFlow>
+    <boundaryEvent id="boundaryerror1" name="Error" attachedToRef="subprocess1">
+      <errorEventDefinition></errorEventDefinition>
+    </boundaryEvent>
+    <sequenceFlow id="flow19" sourceRef="boundaryerror1" targetRef="mailtask1"></sequenceFlow>
+    <endEvent id="errorendevent1" name="ErrorEnd">
+      <errorEventDefinition></errorEventDefinition>
+    </endEvent>
+    <endEvent id="endevent2" name="End"></endEvent>
+    <sequenceFlow id="flow23" sourceRef="subprocess1" targetRef="endevent2"></sequenceFlow>
+    <textAnnotation id="textannotation1">
+      <text>Institutional Record Linkage
+Group Matching</text>
+    </textAnnotation>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_institutionalBlocking">
+    <bpmndi:BPMNPlane bpmnElement="institutionalBlocking" id="BPMNPlane_institutionalBlocking">
+      <bpmndi:BPMNShape bpmnElement="mailtask1" id="BPMNShape_mailtask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="343.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="BPMNShape_servicetask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="475.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="subprocess1" id="BPMNShape_subprocess1">
+        <omgdc:Bounds height="93.0" width="681.0" x="190.0" y="68.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="220.0" y="98.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="hierarchyClustering" id="BPMNShape_hierarchyClustering">
+        <omgdc:Bounds height="55.0" width="105.0" x="280.0" y="88.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="disjointedGroups" id="BPMNShape_disjointedGroups">
+        <omgdc:Bounds height="55.0" width="105.0" x="410.0" y="88.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="810.0" y="98.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="distanceMatrix" id="BPMNShape_distanceMatrix">
+        <omgdc:Bounds height="55.0" width="105.0" x="540.0" y="88.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="pMedoids" id="BPMNShape_pMedoids">
+        <omgdc:Bounds height="55.0" width="105.0" x="670.0" y="88.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent2" id="BPMNShape_startevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="110.0" y="97.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundaryerror1" id="BPMNShape_boundaryerror1">
+        <omgdc:Bounds height="30.0" width="30.0" x="381.0" y="149.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="errorendevent1" id="BPMNShape_errorendevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="611.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="900.0" y="97.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="textannotation1" id="BPMNShape_textannotation1">
+        <omgdc:Bounds height="50.0" width="161.0" x="20.0" y="20.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="448.0" y="227.0"></omgdi:waypoint>
+        <omgdi:waypoint x="475.0" y="227.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="580.0" y="227.0"></omgdi:waypoint>
+        <omgdi:waypoint x="611.0" y="227.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="255.0" y="115.0"></omgdi:waypoint>
+        <omgdi:waypoint x="280.0" y="115.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="385.0" y="115.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="115.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="515.0" y="115.0"></omgdi:waypoint>
+        <omgdi:waypoint x="540.0" y="115.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow21" id="BPMNEdge_flow21">
+        <omgdi:waypoint x="645.0" y="115.0"></omgdi:waypoint>
+        <omgdi:waypoint x="670.0" y="115.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow22" id="BPMNEdge_flow22">
+        <omgdi:waypoint x="775.0" y="115.0"></omgdi:waypoint>
+        <omgdi:waypoint x="810.0" y="115.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="145.0" y="114.0"></omgdi:waypoint>
+        <omgdi:waypoint x="190.0" y="114.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
+        <omgdi:waypoint x="396.0" y="179.0"></omgdi:waypoint>
+        <omgdi:waypoint x="395.0" y="200.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow23" id="BPMNEdge_flow23">
+        <omgdi:waypoint x="871.0" y="114.0"></omgdi:waypoint>
+        <omgdi:waypoint x="900.0" y="114.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

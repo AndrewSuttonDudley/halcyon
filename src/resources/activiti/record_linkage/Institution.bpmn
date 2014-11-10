@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/institution">
+  <process id="institution" name="Record Linkage - Institution" isExecutable="true">
+    <startEvent id="start" name="Start"></startEvent>
+    <endEvent id="end" name="End"></endEvent>
+    <dataObject id="body" name="body" itemSubjectRef="xsd:string"></dataObject>
+    <callActivity id="institutionalDataCleansing" name="Data Cleansing"></callActivity>
+    <callActivity id="institutionalBlocking" name="Blocking"></callActivity>
+    <callActivity id="institutionalFeatureCreation" name="Feature Creation"></callActivity>
+    <callActivity id="institutionalGroupMatching" name="Group Matching"></callActivity>
+    <sequenceFlow id="flow1" sourceRef="start" targetRef="institutionalDataCleansing"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="institutionalDataCleansing" targetRef="institutionalBlocking"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="institutionalBlocking" targetRef="institutionalFeatureCreation"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="institutionalFeatureCreation" targetRef="predictions"></sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="predictions" targetRef="institutionalGroupMatching"></sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="institutionalGroupMatching" targetRef="end"></sequenceFlow>
+    <serviceTask id="predictions" name="Predictions"></serviceTask>
+    <textAnnotation id="textannotation1">
+      <text>Institutional Record Linkage
+Main Process</text>
+    </textAnnotation>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_institution">
+    <bpmndi:BPMNPlane bpmnElement="institution" id="BPMNPlane_institution">
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="35.0" width="35.0" x="60.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end" id="BPMNShape_end">
+        <omgdc:Bounds height="35.0" width="35.0" x="790.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="institutionalDataCleansing" id="BPMNShape_institutionalDataCleansing">
+        <omgdc:Bounds height="55.0" width="105.0" x="130.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="institutionalBlocking" id="BPMNShape_institutionalBlocking">
+        <omgdc:Bounds height="55.0" width="105.0" x="260.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="institutionalFeatureCreation" id="BPMNShape_institutionalFeatureCreation">
+        <omgdc:Bounds height="55.0" width="105.0" x="390.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="institutionalGroupMatching" id="BPMNShape_institutionalGroupMatching">
+        <omgdc:Bounds height="55.0" width="105.0" x="650.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="predictions" id="BPMNShape_predictions">
+        <omgdc:Bounds height="55.0" width="105.0" x="520.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="textannotation1" id="BPMNShape_textannotation1">
+        <omgdc:Bounds height="50.0" width="185.0" x="20.0" y="20.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="95.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="130.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="235.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="260.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="365.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="390.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="495.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="520.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="625.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="650.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="755.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="790.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

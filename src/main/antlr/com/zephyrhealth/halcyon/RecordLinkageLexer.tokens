@@ -1,0 +1,15 @@
+WHITESPACE=9
+FIELD_NAME=8
+INT=7
+T__1=5
+T__0=6
+T__3=3
+T__5=1
+T__2=4
+T__4=2
+'removeWhitespace('=6
+','=5
+'assign('=4
+'\n'=3
+'exactMatch('=2
+')'=1
